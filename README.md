@@ -2,13 +2,13 @@
 
 <img src="docs/l1w.png" width="340" alt="Genisom L1W model, rendered from l1w_description">
 
-# genisom_l1w_ros2
+# l1w_ros2
 
 **ROS 2 Humble packages for the ZSBot Genisom L1W wheel-legged quadruped: an SDK driver for speed
 commands, odometry, IMU, joints and battery, a URDF with the calibrated sensors, and one bringup
 launch for the robot with its Livox MID-360 and RealSense D435i.**
 
-[![CI](https://github.com/DarmawanRobotics/genisom_l1w_ros2/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/DarmawanRobotics/genisom_l1w_ros2/actions/workflows/ci.yml)
+[![CI](https://github.com/DarmawanRobotics/l1w_ros2/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/DarmawanRobotics/l1w_ros2/actions/workflows/ci.yml)
 [![ROS 2](https://img.shields.io/badge/ROS%202-Humble-22314E?logo=ros&logoColor=white)](https://docs.ros.org/en/humble/)
 [![Ubuntu](https://img.shields.io/badge/Ubuntu-22.04-E95420?logo=ubuntu&logoColor=white)](https://releases.ubuntu.com/22.04/)
 ![C++](https://img.shields.io/badge/C%2B%2B-17-00599C?logo=cplusplus&logoColor=white)
@@ -54,26 +54,6 @@ other robot dog, through `cmd_vel`, `odom` and one Trigger service per robot com
 
 ## System
 
-```mermaid
-flowchart LR
-  subgraph jetson["Jetson Orin NX · 192.168.234.234"]
-    app["your stack<br/>e.g. Pashupati"]
-    drv["l1w_driver_node"]
-    lv["livox_ros_driver2"]
-    rs["realsense2_camera"]
-  end
-  mc["motion computer<br/>Firefly RK3588<br/>192.168.234.1"]
-  lidar["Livox MID-360<br/>192.168.123.20"]
-  cam["RealSense D435i<br/>USB"]
-  app -->|"cmd_vel, commands"| drv
-  drv -->|"odom, imu, joints, battery"| app
-  drv <-->|"zsibot SDK over UDP"| mc
-  lidar --> lv
-  lv -->|"/livox/lidar, /livox/imu"| app
-  cam --> rs
-  rs -->|"/camera/camera/..."| app
-```
-
 | Part | Address |
 |---|---|
 | Jetson Orin NX, runs these packages | `192.168.234.234` on the robot network |
@@ -111,7 +91,7 @@ For another prefix: `ZSIBOT_SDK_ROOT=<prefix> script/setup.sh install`, then
 
 ```bash
 cd <your_ws>/src
-git submodule add https://github.com/DarmawanRobotics/genisom_l1w_ros2.git   # or git clone
+git submodule add https://github.com/DarmawanRobotics/l1w_ros2.git   # or git clone
 cd .. && rosdep install --from-paths src --ignore-src -y --skip-keys livox_ros_driver2
 colcon build --packages-up-to l1w_bringup
 ```
@@ -219,7 +199,7 @@ then set in `/etc/pashupati/pashupati.env`:
 ROBOT_BRINGUP=l1w_bringup
 ROBOT_NS=l1w
 ROBOT_IP=192.168.234.1
-ROBOT_SETUP=/home/robot/dev/Pashupati/src/xtras/robots/genisom_l1w_ros2/script/setup.sh
+ROBOT_SETUP=/home/robot/dev/Pashupati/src/xtras/robots/l1w_ros2/script/setup.sh
 # the vendor autostart runs its own Livox driver and motion stack; quoted, it has spaces
 ROBOT_PRESTART="/usr/local/bin/robot-launch stop driver-livox forward"
 ```

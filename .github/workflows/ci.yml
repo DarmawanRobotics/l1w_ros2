@@ -64,9 +64,9 @@ jobs:
     steps:
       - uses: actions/checkout@v4
         with:
-          path: src/genisom_l1w_ros2
+          path: src/l1w_ros2
       - name: zsibot SDK
-        run: src/genisom_l1w_ros2/script/setup.sh install
+        run: src/l1w_ros2/script/setup.sh install
       - name: Dependencies
         run: |
           apt-get update
@@ -89,7 +89,7 @@ jobs:
         run: |
           source install/setup.bash
           for args in "" "use_sensors:=false" "camera_stream_frames:=true prefix:=a_"; do
-            xacro src/genisom_l1w_ros2/l1w_description/urdf/l1w.urdf.xacro $args > /tmp/l1w.urdf
+            xacro src/l1w_ros2/l1w_description/urdf/l1w.urdf.xacro $args > /tmp/l1w.urdf
             check_urdf /tmp/l1w.urdf > /dev/null && echo "URDF ok: ${args:-defaults}"
           done
       - name: Launch files
