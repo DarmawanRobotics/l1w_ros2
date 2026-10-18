@@ -54,26 +54,6 @@ other robot dog, through `cmd_vel`, `odom` and one Trigger service per robot com
 
 ## System
 
-```mermaid
-flowchart LR
-  subgraph jetson["Jetson Orin NX · 192.168.234.234"]
-    app["your stack<br/>e.g. Pashupati"]
-    drv["l1w_driver_node"]
-    lv["livox_ros_driver2"]
-    rs["realsense2_camera"]
-  end
-  mc["motion computer<br/>Firefly RK3588<br/>192.168.234.1"]
-  lidar["Livox MID-360<br/>192.168.123.20"]
-  cam["RealSense D435i<br/>USB"]
-  app -->|"cmd_vel, commands"| drv
-  drv -->|"odom, imu, joints, battery"| app
-  drv <-->|"zsibot SDK over UDP"| mc
-  lidar --> lv
-  lv -->|"/livox/lidar, /livox/imu"| app
-  cam --> rs
-  rs -->|"/camera/camera/..."| app
-```
-
 | Part | Address |
 |---|---|
 | Jetson Orin NX, runs these packages | `192.168.234.234` on the robot network |
