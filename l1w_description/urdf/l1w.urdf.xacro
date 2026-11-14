@@ -21,7 +21,9 @@
       <origin xyz="0.13011 -0.02329 0.17598" rpy="0 0 0"/>
     </xacro:livox_mid360>
 
-    <!-- RealSense D435i bottom screw: mesh estimate (+-5 mm). TODO: confirm 10 deg pitch. -->
+    <!-- RealSense D435i bottom screw: mesh estimate (+-5 mm). TODO: confirm 10 deg pitch:
+         with depth obstacles on, lidar_sector_node logs the pitch and roll the floor shows
+         off this mount ("depth camera floor fitted"); add a steady value to the rpy. -->
     <xacro:realsense_d435i parent="${prefix}base_link" name="${prefix}camera"
                            use_mesh="$(arg use_camera_mesh)"
                            stream_frames="$(arg camera_stream_frames)">
