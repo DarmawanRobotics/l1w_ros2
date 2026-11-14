@@ -28,10 +28,10 @@
       <origin xyz="0.250 0 0.096" rpy="0 0.1745 0"/>
     </xacro:realsense_d435i>
 
-    <!-- Built-in front camera (optical frame) from OTA calibration.
-         TODO: rotation looks wrong (optical z points to -Y), translation is fine. -->
+    <!-- Built-in front camera (optical frame) from OTA calibration: optical z looks forward,
+         14 deg above the horizon (the calibrated rotation pointed it to -Y). -->
     <xacro:front_camera parent="${prefix}base_link" name="${prefix}front_camera">
-      <origin xyz="0.177209 -0.023265 0.030455" rpy="-0.019302 1.325774 -1.558198"/>
+      <origin xyz="0.177209 -0.023265 0.030455" rpy="-1.325814 -0.00708 -1.56774"/>
     </xacro:front_camera>
 
   </xacro:if>
