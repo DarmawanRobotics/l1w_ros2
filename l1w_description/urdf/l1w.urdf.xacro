@@ -21,13 +21,15 @@
       <origin xyz="0.13011 -0.02329 0.17598" rpy="0 0 0"/>
     </xacro:livox_mid360>
 
-    <!-- RealSense D435i bottom screw: mesh estimate (+-5 mm). TODO: confirm 10 deg pitch:
-         with depth obstacles on, lidar_sector_node logs the pitch and roll the floor shows
-         off this mount ("depth camera floor fitted"); add a steady value to the rpy. -->
+    <!-- RealSense D435i bottom screw: position from the mesh (+-5 mm). Orientation measured
+         from the floor in its depth cloud, robot standing (2026-11-15, four clouds): 18.3 deg
+         down, 1.85 deg rolled left (the mesh estimate was 10 deg down, level). With depth
+         obstacles on, lidar_sector_node logs how far the floor says the mount is off
+         ("depth camera floor fitted"); add a steady value to this rpy. -->
     <xacro:realsense_d435i parent="${prefix}base_link" name="${prefix}camera"
                            use_mesh="$(arg use_camera_mesh)"
                            stream_frames="$(arg camera_stream_frames)">
-      <origin xyz="0.250 0 0.096" rpy="0 0.1745 0"/>
+      <origin xyz="0.250 0 0.096" rpy="-0.0322 0.3196 -0.0079"/>
     </xacro:realsense_d435i>
 
     <!-- Built-in front camera (optical frame) from OTA calibration: optical z looks forward,
