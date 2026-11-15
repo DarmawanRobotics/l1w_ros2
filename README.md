@@ -50,9 +50,9 @@ other robot dog, through `cmd_vel`, `odom` and one Trigger service per robot com
 
 **Bringup** (`l1w_bringup`)
 - One launch for the driver, the description, the Livox MID-360 and the RealSense D435i.
-- The camera node respawns when the camera drops out. Color 640 × 480 and depth 424 × 240 at
-  15 fps; the depth as a point cloud (decimated to 212 × 120, no texture) for the obstacles
-  below the LiDAR.
+- The camera node respawns when the camera drops out. Color and depth 640 × 480 at 15 fps; the
+  depth as a point cloud (decimated to 160 × 120, no texture) for the obstacles below the
+  LiDAR. On the Jetson its parameters are `pointcloud__neon_.*` (librealsense's NEON block).
 
 ## System
 
